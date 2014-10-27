@@ -10,6 +10,21 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="MoveType.h" />
+    <ClInclude Include="View.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Pool.cpp" />
+    <ClCompile Include="View.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{371ABA3B-5062-44E3-A093-E1BB64BF791C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -77,21 +92,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="D:\Work\Pool\Ball.h" />
-    <ClInclude Include="D:\Work\Pool\Controller.h" />
-    <ClInclude Include="D:\Work\Pool\Model.h" />
-    <ClInclude Include="D:\Work\Pool\MoveType.h" />
-    <ClInclude Include="D:\Work\Pool\View.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="D:\Work\Pool\Ball.cpp" />
-    <ClCompile Include="D:\Work\Pool\Controller.cpp" />
-    <ClCompile Include="D:\Work\Pool\Main.cpp" />
-    <ClCompile Include="D:\Work\Pool\Model.cpp" />
-    <ClCompile Include="D:\Work\Pool\Pool.cpp" />
-    <ClCompile Include="D:\Work\Pool\View.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
