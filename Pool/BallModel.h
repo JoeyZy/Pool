@@ -3,6 +3,6 @@
 #include "Model.h"
 #include "MoveType.h"
 
-class Ball: public Model {
+class BallModel: public Model {
 
 };
