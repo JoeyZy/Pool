@@ -1,13 +1,4 @@
-
-#pragma once
-#include <iostream>
-#include "Model.h"
-#include "MoveType.h"
-
-class Ball: public Model
-{
-public:
-	Ball() {
+	BallModel::BallModel() {
 		x = 0;
 		y = 0;
 		radius = 5;

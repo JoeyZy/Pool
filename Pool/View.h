@@ -1,8 +1,11 @@
 #pragma once
+#include "Model.h"
+
 class View
 {
+	Model *model;
 public:
-	View();
-	~View();
+	void setModel(Model *model);
+	Model* getModel();
 };
 

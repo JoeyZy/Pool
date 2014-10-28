@@ -1,15 +1,16 @@
-#include <iostream>
+﻿#include <iostream>
 #include "Controller.h"
-#include "Ball.h"
+#include "ConsoleController.h"
+#include "OpenGLController.h"
+#include "Model.h"
+
 
 
 int main() {
+	Model* model = new BallModel();
+	Controller* c = new ConsoleController();
+	c->setModel
+	c->controll();
 
-	Controller c;
-	Ball ball;
-	char ch;
-	while(ch!=13) {
 
-	}
-	
 };

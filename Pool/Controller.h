@@ -1,9 +1,8 @@
-#include "windows.h"
+#pragma once
+
 #include <iostream>
 #include "Model.h"
 #include "View.h"
-
-using namespace std;
 
 class Controller {
 	Model *model;

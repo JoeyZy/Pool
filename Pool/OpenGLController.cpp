@@ -1,5 +1,6 @@
-#include "Controller.h"
+#include "OpenGLController.h"
+#include <iostream>
 
-void Controller::controll() {
-
+void OpenGLController::controll() {
+	std::cout << "Hello";
 }
