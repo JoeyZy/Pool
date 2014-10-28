@@ -1,22 +1,18 @@
+#include "windows.h"
+#include <iostream>
 #include "Model.h"
 #include "View.h"
 
+using namespace std;
+
 class Controller {
 	Model *model;
-	View view;
+	View *view;
 public:
-	Controller();
-	~Controller();
-	void setModel(Model *model) {
-		this->model = model;
-	}
-	Model* getModel(){
-		return model;
-	}
-	void setView(View view) {
-		this->view = view;
-	}
-	View getView(){
-		return view;
-	}
+	void setModel(Model *model);
+	Model* getModel();
+	void setView(View *view);
+	View* getView();
+
+	virtual void controll() = 0;
 };

@@ -11,19 +11,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="MoveType.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="BallModel.cpp" />
+    <ClCompile Include="ConsoleController.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="OpenGLController.cpp" />
     <ClCompile Include="Pool.cpp" />
-    <ClCompile Include="View.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{371ABA3B-5062-44E3-A093-E1BB64BF791C}</ProjectGuid>

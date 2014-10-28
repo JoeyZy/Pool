@@ -1,7 +1,14 @@
 #include "Controller.h"
 
-Controller::Controller() {
+void Controller::setModel(Model *model) {
+	this->model = model;
 }
-
-Controller::~Controller() {
+Model* Controller::getModel(){
+	return model;
+}
+void Controller::setView(View *view) {
+	this->view = view;
+}
+View* Controller::getView(){
+	return view;
 }
