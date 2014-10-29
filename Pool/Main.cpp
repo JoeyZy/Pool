@@ -6,7 +6,7 @@
 #include "BallModel.h"
 #include "ConsoleView.h"
 
-
+//Main
 
 int main() {
 	Model* model = new BallModel();
