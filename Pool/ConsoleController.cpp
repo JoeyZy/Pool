@@ -22,22 +22,27 @@ void ConsoleController::controll() {
 			&InRec,
 			1,
 			&NumRead);
-
 		switch (InRec.Event.KeyEvent.wVirtualKeyCode)
 		{
 		case VK_LEFT:
-			std::cout << "Move left" << std::endl;
+			//cout << "move left" << endl;
+			model->move(LEFT);
+			view->draw(model);
 			break;
 		case VK_UP:
-			std::cout << "Move up" << std::endl;
+			//cout << "move up" << endl;
+			model->move(UP);
+			view->draw(model);
 			break;
 		case VK_RIGHT:
-			std::cout << "Move right" << std::endl;
+			//cout << "move right" << endl;
+			model->move(RIGHT);
+			view->draw(model);
 			break;
 		case VK_DOWN:
-			std::cout << "Move down" << std::endl;
-			break;
-		defaut:
+			//cout << "move down" << endl;
+			model->move(DOWN);
+			view->draw(model);
 			break;
 		}
 	}

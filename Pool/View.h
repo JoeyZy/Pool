@@ -3,9 +3,7 @@
 
 class View
 {
-	Model *model;
 public:
-	void setModel(Model *model);
-	Model* getModel();
+	virtual void draw (Model* model) = 0;
 };
 

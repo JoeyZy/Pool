@@ -18,3 +18,9 @@ int Model::getRadius() {
 void Model::setRadius() {
 	this->radius=radius;
 }
+void Model::setType(string type) {
+	this->type = type;
+}
+string Model::getType() {
+	return type;
+}

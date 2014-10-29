@@ -5,13 +5,13 @@
 #include "View.h"
 
 class Controller {
+protected:
 	Model *model;
-	View *view;
+	View* view;
 public:
 	void setModel(Model *model);
 	Model* getModel();
 	void setView(View *view);
 	View* getView();
-
 	virtual void controll() = 0;
 };
