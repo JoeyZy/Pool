@@ -1,6 +1,11 @@
 #include "ConsoleController.h"
 #include "windows.h"
 
+/*
+Do contolling;
+*/
+
+
 void ConsoleController::controll() {
 	HANDLE hIn;
 	HANDLE hOut;
