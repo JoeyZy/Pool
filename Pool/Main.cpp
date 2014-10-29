@@ -7,7 +7,6 @@
 #include "ConsoleView.h"
 
 //Main
-//Added another comment
 
 int main() {
 	Model* model = new BallModel();
