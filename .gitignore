@@ -185,3 +185,13 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+Debug/Pool.exe
+Debug/Pool.pdb
+Pool.v11.suo
+Pool/Debug/vc110.pdb
+Pool/Debug/vc110.idb
+Pool/Debug/Pool.log
+Pool/Debug/link.read.1.tlog
+Pool.v11.suo
+Debug/Pool.pdb
+Debug/Pool.exe
