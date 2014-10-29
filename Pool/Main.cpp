@@ -1,18 +1,21 @@
 ﻿#include <iostream>
 #include "Controller.h"
-#include "ConsoleController.h"
-#include "OpenGLController.h"
+#include "WindowsKeyboardController.h"
+#include "NotWindowsKeyboardController.h"
 #include "Model.h"
 #include "BallModel.h"
 #include "ConsoleView.h"
 
-//Main + main
+//Main + 1 + 2 + 3 + 4
 
 int main() {
 	Model* model = new BallModel();
 	View* view = new ConsoleView(); 
-	Controller* c = new ConsoleController();
+	Controller* c = new WindowsKeyboardController();
 	c->setModel(model);
 	c->setView(view);
 	c->controll();
+	delete model;
+	delete view;
+	delete c;
 };
