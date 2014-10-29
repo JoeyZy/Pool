@@ -12,22 +12,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BallModel.h" />
-    <ClInclude Include="ConsoleController.h" />
+    <ClInclude Include="WindowsKeyboardController.h" />
     <ClInclude Include="ConsoleView.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="MoveType.h" />
-    <ClInclude Include="OpenGLController.h" />
+    <ClInclude Include="NotWindowsKeyboardController.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BallModel.cpp" />
-    <ClCompile Include="ConsoleController.cpp" />
+    <ClCompile Include="WindowsKeyboardController.cpp" />
     <ClCompile Include="ConsoleView.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="OpenGLController.cpp" />
+    <ClCompile Include="NotWindowsKeyboardController.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

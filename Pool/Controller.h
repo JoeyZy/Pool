@@ -7,7 +7,7 @@
 class Controller {
 protected:
 	Model *model;
-	View* view;
+	View *view;
 public:
 	void setModel(Model *model);
 	Model* getModel();
