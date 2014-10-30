@@ -22,7 +22,4 @@ int main() {
 	delete view;
 	delete model;
 	system("pause");
-
-
-
 };
