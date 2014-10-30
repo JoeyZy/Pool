@@ -2,5 +2,5 @@
 #include <iostream>
 
 void NotWindowsKeyboardController::controll() {
-	std::cout << "Hello";
+	std::cout << "No controll() implemented";
 }

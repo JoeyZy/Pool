@@ -3,7 +3,10 @@
 
 class View
 {
+protected:
+	string type;
 public:
+	string getType();
 	virtual void draw (Model* model) = 0;
 };
 

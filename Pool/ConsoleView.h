@@ -4,6 +4,8 @@ class ConsoleView :
 	public View
 {
 public:
+	ConsoleView();
+	~ConsoleView();
 	void View::draw(Model* model);
 };
 

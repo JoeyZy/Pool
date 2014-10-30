@@ -5,17 +5,24 @@
 #include "Model.h"
 #include "BallModel.h"
 #include "ConsoleView.h"
+#include "OpenGLview.h"
 
 //Main + 1 + 2 + 3 + 4
 
 int main() {
 	Model* model = new BallModel();
 	View* view = new ConsoleView(); 
-	Controller* c = new WindowsKeyboardController();
-	c->setModel(model);
+	Controller* c = new WindowsKeyboardController(model, view);
+	c->controll();
+	delete view;
+	view = new OpenGLView();
 	c->setView(view);
 	c->controll();
-	delete model;
-	delete view;
 	delete c;
+	delete view;
+	delete model;
+	system("pause");
+
+
+
 };

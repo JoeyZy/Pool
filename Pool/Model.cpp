@@ -12,12 +12,6 @@ int Model::getY() {
 void Model::setY() {
 	this->y=y;
 }
-int Model::getRadius() {
-	return radius;
-}
-void Model::setRadius() {
-	this->radius=radius;
-}
 void Model::setType(string type) {
 	this->type = type;
 }
