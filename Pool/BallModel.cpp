@@ -6,6 +6,12 @@
 		radius = 5;
 		type = "Ball";
 	}
+	int BallModel::getRadius(){
+		return radius;
+	}
+	void BallModel::setRadius(int radius) {
+		this->radius = radius;
+	}
 	void BallModel::move(MoveType move) {
 		switch (move) {
 		case LEFT:

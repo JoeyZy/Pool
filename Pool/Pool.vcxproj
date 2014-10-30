@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BallModel.h" />
+    <ClInclude Include="OpenGLView.h" />
     <ClInclude Include="WindowsKeyboardController.h" />
     <ClInclude Include="ConsoleView.h" />
     <ClInclude Include="Controller.h" />
@@ -22,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BallModel.cpp" />
+    <ClCompile Include="OpenGLView.cpp" />
     <ClCompile Include="WindowsKeyboardController.cpp" />
     <ClCompile Include="ConsoleView.cpp" />
     <ClCompile Include="Controller.cpp" />

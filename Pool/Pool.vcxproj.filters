@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Views">
       <UniqueIdentifier>{75154b71-119a-47f8-bd47-8403ac5e65cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Views">
+      <UniqueIdentifier>{fe33571a-ed71-41a5-8534-36de4a03bcde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Model.h">
@@ -39,14 +42,17 @@
     <ClInclude Include="BallModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WindowsKeyboardController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NotWindowsKeyboardController.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleView.h">
+      <Filter>Header Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLView.h">
+      <Filter>Header Files\Views</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="NotWindowsKeyboardController.cpp">
       <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLView.cpp">
+      <Filter>Source Files\Views</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

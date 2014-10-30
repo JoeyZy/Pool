@@ -8,6 +8,7 @@ class Controller {
 protected:
 	Model *model;
 	View *view;
+	bool doControlling;
 public:
 	void setModel(Model *model);
 	Model* getModel();
