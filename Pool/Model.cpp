@@ -34,6 +34,7 @@ void Model::doListening() {
 		std::cout << "Listening " << speedX << " " << speedY << endl;
 		x += speedX;
 		y += speedY;
+		std::cout << controller->getView()->getType() << std::endl;
 		controller->getView()->draw(this);
 //	}
 }

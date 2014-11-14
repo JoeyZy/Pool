@@ -9,13 +9,13 @@
 
 //Main + 1 + 2 + 3 + 4
 
-int main() {
+int main(int argc, char **argv) {
 	Model* model = new BallModel();
 	View* view = new ConsoleView(); 
 	Controller* c = new WindowsKeyboardController(model, view);
 	c->controll();
 	delete view;
-	view = new OpenGLView();
+	view = new OpenGLView(argc, argv);
 	c->setView(view);
 	c->controll();
 	delete c;
