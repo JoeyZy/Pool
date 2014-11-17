@@ -22,19 +22,12 @@ void function_2() {
 }
 
 int main(int argc, char **argv) {
-//	std::thread t1(function_1);
-//	t1.join();
-	model = new BallModel();
-	View* view = new OpenGLView(argc, argv); 
-		//= new ConsoleView(); 
-	c = new WindowsKeyboardController(model, view);
-	//c->controll();
-	//delete view;
-	std::thread t1(function_1);
-	std::thread t2(function_2);
-//	view = new OpenGLView(argc, argv);
-//	c->controll();
-	((OpenGLView*)view)->initGL();
+	model = new BallModel(); //Model
+	View* view = new OpenGLView(argc, argv); //View
+	c = new WindowsKeyboardController(model, view); //Controller -
+	std::thread t1(function_1); //keyboard listener in separate thread 
+	std::thread t2(function_2); //model calcs in separate thread
+	((OpenGLView*)view)->initGL(); //post init OpenGL
 	delete c;
 	delete view;
 	delete model;

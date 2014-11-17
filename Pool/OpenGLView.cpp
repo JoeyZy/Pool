@@ -9,28 +9,13 @@
 using namespace std;
 const double PI  =3.141592653589793238463;
 
-int OpenGLView::x;
-int OpenGLView::y;
-int OpenGLView::width=1280;
-int OpenGLView::height=720;
-//Model* OpenGLView::model;
-
-/*void OpenGLView::draw(Model* model) {
-	if (model->getType()=="Ball") {
-		cout << "Console: " << model->getType() << ": x=" << model->getX() << ", y= " << model->getY() << endl;
-		x = model->getX();
-		y = model->getY();
-	} else {
-		cout << "Don't know how to draw it" << endl;
-	}
-}*/
-
-GLfloat spin=0.0;
 void init(void)
 {
 	glClearColor(0.0,0.7,0.0,0.0);
 	glShadeModel(GL_FLAT);
 }
+
+//draw circle
 void circle(float x, float y, float r, int segments)
 {
 	glBegin( GL_TRIANGLE_FAN );
@@ -61,7 +46,7 @@ void reshape(int w, int h)
 	glViewport(0,0,(GLsizei) w, (GLsizei) h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-w/4,w/4,-h/4,h/4,-1.0,1.0);
+	glOrtho(-w/2,w/2,-h/2,h/2,-1.0,1.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -73,7 +58,7 @@ OpenGLView::OpenGLView(int argc, char **argv) {
 
 void OpenGLView::initGL() {
 	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
-	glutInitWindowSize(width,height);
+	glutInitWindowSize(OpenGLView::model->areaWidth,OpenGLView::model->areaHeight);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("Pool");
 	init();
