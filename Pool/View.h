@@ -6,7 +6,9 @@ class View
 protected:
 	string type;
 public:
+	static Model* model;
 	string getType();
-	virtual void draw (Model* model) = 0;
+	void setModel(Model* model);
+	Model* getModel();
 };
 

@@ -5,8 +5,8 @@ class OpenGLView :
 	public View
 {
 public:
-	OpenGLView();
+	OpenGLView(int argc, char** argv);
 	~OpenGLView();
-	void View::draw(Model* model);
+	void initGL();
 };
 

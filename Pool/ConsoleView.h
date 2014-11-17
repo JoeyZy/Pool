@@ -6,6 +6,6 @@ class ConsoleView :
 public:
 	ConsoleView();
 	~ConsoleView();
-	void View::draw(Model* model);
+//	void View::draw(Model* model);
 };
 

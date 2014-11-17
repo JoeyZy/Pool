@@ -1,15 +1,18 @@
 #include "Model.h"
+#include <iostream>
+#include "Controller.h"
+#include <thread>
 
-int Model::getX() {
+float Model::getX() {
 	return x;
 }
-void Model::setX(int x) {
+void Model::setX(float x) {
 	this->x=x;
 }
-int Model::getY() {
+float Model::getY() {
 	return y;
 }
-void Model::setY() {
+void Model::setY(float y) {
 	this->y=y;
 }
 void Model::setType(string type) {
@@ -17,4 +20,13 @@ void Model::setType(string type) {
 }
 string Model::getType() {
 	return type;
+}
+void Model::setController(Controller* controller) {
+	this->controller = controller;
+}
+Controller* Model::getController() {
+	return controller;
+}
+
+void Model::doListening() {
 }
