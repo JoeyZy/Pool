@@ -7,9 +7,11 @@ class OpenGLView :
 public:
 	static int x; 
 	static int y;
+	static int width;
+	static int height;
 	OpenGLView(int argc, char** argv);
 	~OpenGLView();
-	void init();
-	void View::draw(Model* model);
+	void initGL();
+	//void displayCircle();
 };
 

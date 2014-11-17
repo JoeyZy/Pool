@@ -14,6 +14,7 @@ protected:
 	int x, y, speedX, speedY, friction;
 	string type;
 public:
+
 	int getX();
 	void setX(int x);
 	int getY();

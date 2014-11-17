@@ -8,9 +8,9 @@ BallModel::BallModel() {
 	speedX = 0;
 	speedY = 0;
 	friction = 1;
-	radius = 5;
+	radius = 10;
 	type = "Ball";
-	defaultSpeed = 30;
+	defaultSpeed = 20;
 }
 int BallModel::getRadius(){
 	return radius;
@@ -23,19 +23,19 @@ void BallModel::move(MoveType move) {
 
 	switch (move) {
 	case LEFT:
-		speedX= -10;
+		speedX= -defaultSpeed;
 		//			controller->getView()->draw(this);
 		break;
 	case UP:
-		speedY = 10;
+		speedY = defaultSpeed;
 		//			controller->getView()->draw(this);
 		break;
 	case RIGHT:
-		speedX= 10;
+		speedX= defaultSpeed;
 		//			controller->getView()->draw(this);
 		break;
 	case DOWN:
-		speedY= -10;
+		speedY= -defaultSpeed;
 		//			controller->getView()->draw(this);
 		break;
 	}

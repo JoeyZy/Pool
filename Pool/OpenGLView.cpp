@@ -5,26 +5,30 @@
 #include <gl/glut.h>
 #include <math.h>
 #include "BallModel.h"
+#include <thread>
 using namespace std;
 const double PI  =3.141592653589793238463;
 
 int OpenGLView::x;
 int OpenGLView::y;
+int OpenGLView::width=1280;
+int OpenGLView::height=720;
+//Model* OpenGLView::model;
 
-void OpenGLView::draw(Model* model) {
+/*void OpenGLView::draw(Model* model) {
 	if (model->getType()=="Ball") {
-				cout << "Console: " << model->getType() << ": x=" << model->getX() << ", y= " << model->getY() << endl;
+		cout << "Console: " << model->getType() << ": x=" << model->getX() << ", y= " << model->getY() << endl;
 		x = model->getX();
 		y = model->getY();
 	} else {
 		cout << "Don't know how to draw it" << endl;
 	}
-}
+}*/
 
 GLfloat spin=0.0;
 void init(void)
 {
-	glClearColor(0.0,0.0,0.0,0.0);
+	glClearColor(0.0,0.7,0.0,0.0);
 	glShadeModel(GL_FLAT);
 }
 void circle(float x, float y, float r, int segments)
@@ -37,22 +41,19 @@ void circle(float x, float y, float r, int segments)
 	}
 	glEnd();
 }
+
 void displayCircle(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glPushMatrix();
-//	glTranslatef(spin, spin, 0.0);
 	glColor3f(1.0,1.0,1.0);
-	//	glRectf(-50.0,-50.0,0.0,0.0);
-//	std::cout << "Circle " << OpenGLView::x << " " << OpenGLView::y << std::endl;
-	circle(OpenGLView::x, OpenGLView::y, 10.0, 40);
+	circle(OpenGLView::model->getX(), OpenGLView::model->getY(), ((BallModel*) OpenGLView::model)->getRadius(), 40);
 	glPopMatrix();
 	glutSwapBuffers();
 }
+
 void spinDisplay(void)
 {
-//	spin++;
-	spin += 0.001;
 	glutPostRedisplay();
 }
 void reshape(int w, int h)
@@ -60,14 +61,19 @@ void reshape(int w, int h)
 	glViewport(0,0,(GLsizei) w, (GLsizei) h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-50.0,50.0,-50.0,50.0,-1.0,1.0);
+	glOrtho(-w/4,w/4,-h/4,h/4,-1.0,1.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 
-void OpenGLView::init() {
-		glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
-	glutInitWindowSize(250,250);
+OpenGLView::OpenGLView(int argc, char **argv) {
+	type = "OpenGL";
+	glutInit(&argc,argv);
+}
+
+void OpenGLView::initGL() {
+	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
+	glutInitWindowSize(width,height);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("Pool");
 	init();
@@ -75,13 +81,5 @@ void OpenGLView::init() {
 	glutReshapeFunc(reshape);
 	glutIdleFunc(spinDisplay);
 	glutMainLoop();
-
 }
 
-OpenGLView::OpenGLView(int argc, char **argv) {
-	type = "OpenGL";
-	glutInit(&argc,argv);
-
-	//glutMouseFunc(mouse);
-//glutMainLoop();
-}

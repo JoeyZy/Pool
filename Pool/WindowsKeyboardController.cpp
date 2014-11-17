@@ -1,5 +1,7 @@
 #include "WindowsKeyboardController.h"
 #include "windows.h"
+#include <thread>
+
 
 /*
 Do contolling;
@@ -10,6 +12,7 @@ WindowsKeyboardController::WindowsKeyboardController(Model* model, View* view) {
 	this->model = model;
 	this->view = view;
 	model->setController(this);
+	view->setModel(model);
 }
 
 void WindowsKeyboardController::controll() {
@@ -24,7 +27,7 @@ void WindowsKeyboardController::controll() {
 	cout << "Used view: " << view->getType() << endl;
 	while (doControlling)
 	{
-		model->doListening();
+	//	model->doListening;
 		ReadConsoleInput(hIn,
 			&InRec,
 			1,
