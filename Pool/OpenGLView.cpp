@@ -29,10 +29,12 @@ void circle(float x, float y, float r, int segments)
 
 void displayCircle(void)
 {
+	BallModel* model = (BallModel*) OpenGLView::model;
 	glClear(GL_COLOR_BUFFER_BIT);
 	glPushMatrix();
 	glColor3f(1.0,1.0,1.0);
-	circle(OpenGLView::model->getX(), OpenGLView::model->getY(), ((BallModel*) OpenGLView::model)->getRadius(), 40);
+	circle(model->getX(), model->getY(), model->getRadius(), 40);
+	if (model->getPassiveBall()!=NULL) circle(model->getPassiveBall()->getX(), model->getPassiveBall()->getY(), ((BallModel*)(model->getPassiveBall()))->getRadius(), 40);
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -43,10 +45,11 @@ void spinDisplay(void)
 }
 void reshape(int w, int h)
 {
+
 	glViewport(0,0,(GLsizei) w, (GLsizei) h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-w/2,w/2,-h/2,h/2,-1.0,1.0);
+	glOrtho(-OpenGLView::model->areaWidth/2,OpenGLView::model->areaWidth/2,-OpenGLView::model->areaHeight/2,OpenGLView::model->areaHeight/2,-1.0,1.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }

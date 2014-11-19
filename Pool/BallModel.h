@@ -4,6 +4,9 @@
 
 class BallModel: public Model {
 public:
+	Model* passiveBall;
+	void setPassiveBall(Model* model);
+	Model* getPassiveBall();
 	float moveLeft;
 	float moveUp;
 	float moveRight;
