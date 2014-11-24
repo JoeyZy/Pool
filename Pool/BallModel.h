@@ -7,6 +7,7 @@ public:
 	Model* passiveBall;
 	void setPassiveBall(Model* model);
 	Model* getPassiveBall();
+	double frames;
 	float m;
 	float stepLeft;
 	float stepUp;
@@ -20,6 +21,7 @@ public:
 	BallModel();
 	~BallModel();
 	void move(MoveType move);
+	void increaseSpeed(float &speed1, float &speed2);
 	void listen();
 	void doListening();
 	void correctSpeed();
