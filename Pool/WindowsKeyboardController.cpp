@@ -16,7 +16,12 @@ WindowsKeyboardController::WindowsKeyboardController(Model* model, View* view) {
 }
 
 void WindowsKeyboardController::controll() {
-	doControlling = true;
+	std::thread t1(&WindowsKeyboardController::doControlling, this);
+	t1.detach();
+}
+
+void WindowsKeyboardController::doControlling() {
+	controlling = true;
 	HANDLE hIn;
 	HANDLE hOut;
 	INPUT_RECORD InRec;
@@ -25,7 +30,7 @@ void WindowsKeyboardController::controll() {
 	hIn = GetStdHandle(STD_INPUT_HANDLE);
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	cout << "Used view: " << view->getType() << endl;
-	while (doControlling)
+	while (controlling)
 	{
 		ReadConsoleInput(hIn,
 			&InRec,
@@ -47,7 +52,7 @@ void WindowsKeyboardController::controll() {
 				model->move(DOWN);
 				break;
 			case 13: // 'Enter'
-				doControlling = false; //exit from loop
+				controlling = false; //exit from loop
 				break;
 			}
 		}

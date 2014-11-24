@@ -26,7 +26,7 @@ public:
 	void setType(string type);
 	Controller* getController();
 	void setController(Controller* controller);
-	virtual void doListening();
+	virtual void listen() = 0;
 	virtual void move(MoveType move) = 0;
 };
 

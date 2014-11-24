@@ -8,4 +8,5 @@ public:
 	WindowsKeyboardController(Model* model, View* view);
 	~WindowsKeyboardController();
 	void controll();
+	void doControlling();
 };

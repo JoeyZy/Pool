@@ -27,6 +27,3 @@ void Model::setController(Controller* controller) {
 Controller* Model::getController() {
 	return controller;
 }
-
-void Model::doListening() {
-}

@@ -9,7 +9,7 @@ protected:
 	Model *model;
 	View *view;
 public:
-	bool doControlling;
+	bool controlling;
 	void setModel(Model *model);
 	Model* getModel();
 	void setView(View *view);
