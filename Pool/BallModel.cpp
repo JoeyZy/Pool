@@ -2,6 +2,7 @@
 #include "Controller.h"
 #include <thread>
 #include <math.h>
+# define M_PI         3.141592653589793238462643383279502884 /* pi */
 
 BallModel::BallModel() {
 	type = "Ball";
@@ -107,7 +108,39 @@ void BallModel::doListening() {
 			stepUp = stepDown;
 			stepDown = buf;
 		}
-
+		/*
+		if (controller != NULL) {
+			vector<Model*> models = controller->getView()->getModels();
+			for (auto model: models) {
+				if (this == model) continue;
+				BallModel* localModel = (BallModel*) model;
+				int dis = sqrt(pow(x - localModel->getX(),2) + pow(y - localModel->getY(), 2));
+				if (dis +1 == radius + localModel->getRadius()) {
+					cout << dis << " " << x << " " << y << " " << localModel->getX() << " " << localModel->getY() << endl;
+					cout << "lower" << endl;
+					float dx = x-localModel->getX();
+					float dy = y-localModel->getY();
+					float collisionision_angle = atan(dy/dx);
+					float magnitude_1 = sqrt(pow(stepLeft,2) + pow(stepRight,2) + pow(stepUp,2) + pow(stepDown, 2));
+					float magnitude_2 = sqrt(pow(localModel->stepLeft,2) + pow(localModel->stepRight,2) + pow(localModel->stepUp,2) + pow(localModel->stepDown, 2));
+					float direction_1 = atan((stepUp + stepDown) /(stepLeft + stepRight));
+					float direction_2 = atan((localModel->stepUp + localModel->stepDown) /(localModel->stepLeft + localModel->stepRight));
+					float new_xspeed_1 = magnitude_1*cos(direction_1-collisionision_angle);
+					float new_yspeed_1 = magnitude_1*sin(direction_1-collisionision_angle);
+					float new_xspeed_2 = magnitude_2*cos(direction_2-collisionision_angle);
+					float new_yspeed_2 = magnitude_2*sin(direction_2-collisionision_angle);
+					float final_xspeed_1 = ((m-localModel->m)*new_xspeed_1+(localModel->m+localModel->m)*new_xspeed_2)/(m+localModel->m);
+					float final_xspeed_2 = ((m+m)*new_xspeed_1+(localModel->m-m)*new_xspeed_2)/(m+localModel->m);
+					float final_yspeed_1 = new_yspeed_1;
+					float final_yspeed_2 = new_yspeed_2;
+					stepLeft>stepRight?stepLeft:stepRight = cos(collisionision_angle)*final_xspeed_1+cos(collisionision_angle+M_PI/2)*final_yspeed_1;
+					stepUp>stepDown?stepUp:stepDown = sin(collisionision_angle)*final_xspeed_1+sin(collisionision_angle+M_PI/2)*final_yspeed_1;
+					localModel->stepLeft>localModel->stepRight?localModel->stepLeft:stepRight = cos(collisionision_angle)*final_xspeed_2+cos(collisionision_angle+M_PI/2)*final_yspeed_2;
+					localModel->stepUp>localModel->stepDown?localModel->stepUp:stepDown = sin(collisionision_angle)*final_xspeed_2+sin(collisionision_angle+M_PI/2)*final_yspeed_2;
+				}
+			}
+		}
+		*/
 		if (stepLeft > 0) {
 			x-=stepLeft;
 		}
