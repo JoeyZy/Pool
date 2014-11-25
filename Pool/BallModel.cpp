@@ -9,10 +9,10 @@ BallModel::BallModel() {
 	frames = 250;
 	m = 10;
 	startSpeed = 0.12f; //number of points to pass for model in frames/second
-	stepLeft = 0.0; //numer of point for model to pass to left direction
+//	stepLeft = 0.0; //numer of point for model to pass to left direction
 	stepUp = 0.0; // -//- up
 	stepRight = 0.0; // -//- right
-	stepDown = 0.0; // -//- down
+//	stepDown = 0.0; // -//- down
 	//position
 	x = 0.0; 
 	y = 0.0;
@@ -38,16 +38,24 @@ void BallModel::move(MoveType move) {
 	areaHeight = controller->getView()->areaHeight;
 	switch (move) {
 	case LEFT:
-		increaseSpeed(stepLeft, stepRight);
+		stepRight -= startSpeed;
+		if (abs(stepRight)> maxSpeed) stepRight = -maxSpeed;
+//		increaseSpeed(stepLeft, stepRight);
 		break;
 	case UP:
-		increaseSpeed(stepUp, stepDown);
+		stepUp += startSpeed;
+		if (abs(stepUp)> maxSpeed) stepUp = maxSpeed;
+//		increaseSpeed(stepUp, stepDown);
 		break;
 	case RIGHT:
-		increaseSpeed(stepRight, stepLeft);
+		stepRight += startSpeed;
+		if (abs(stepRight)> maxSpeed) stepRight = maxSpeed;
+//		increaseSpeed(stepRight, stepLeft);
 		break;
 	case DOWN:
-		increaseSpeed(stepDown, stepUp);
+		stepUp -= startSpeed;
+		if (abs(stepUp)> maxSpeed) stepUp = -maxSpeed;
+//		increaseSpeed(stepDown, stepUp);
 		break;
 	}
 }
@@ -68,9 +76,9 @@ void BallModel::increaseSpeed(float &speed1, float &speed2) {
 
 void BallModel::correctSpeed() {
 	// speed c = sqrt ( speedX^2 + speedY^2)
-	float c = sqrt(pow(stepLeft,2) + pow(stepRight,2) + pow(stepUp,2) + pow(stepDown, 2));
+	float c = sqrt(pow(stepRight,2) + pow(stepUp,2));
 	if (c < friction) {
-		c = stepLeft = stepRight = stepUp = stepDown = 0;
+		c = stepRight = stepUp = 0;
 	} 
 	float localFriction = friction;
 	//controll speed
@@ -81,8 +89,6 @@ void BallModel::correctSpeed() {
 	float x  = abs((c - localFriction)/c);
 	//	std::cout << x << " " << c << " " << stepLeft << " " <<  stepRight << " " <<  stepUp << " " <<  stepDown << endl;
 	if (x < 1) {
-		stepDown*=x;
-		stepLeft*=x;
 		stepRight*=x;
 		stepUp*=x;
 	}
@@ -98,15 +104,11 @@ void BallModel::doListening() {
 
 		// mirror model way from vertical borders
 		if (x+radius+1>=areaWidth/2 || x-radius-1<=-areaWidth/2) {
-			float buf = stepLeft;
-			stepLeft = stepRight;
-			stepRight = buf;
+			stepRight = -stepRight;
 		}
 		// mirror model from horizontal borders
 		if (y+radius+1>=areaHeight/2 || y-radius-1<=-areaHeight/2) {
-			float buf = stepUp;
-			stepUp = stepDown;
-			stepDown = buf;
+			stepUp = -stepUp;
 		}
 		/*
 		if (controller != NULL) {
@@ -141,18 +143,8 @@ void BallModel::doListening() {
 			}
 		}
 		*/
-		if (stepLeft > 0) {
-			x-=stepLeft;
-		}
-		if (stepUp > 0) {
-			y+=stepUp;
-		}
-		if (stepRight > 0) {
-			x+=stepRight;
-		}
-		if (stepDown > 0) {
-			y-=stepDown;
-		}
+		y+=stepUp;
+		x+=stepRight;
 		correctSpeed();
 		std::this_thread::sleep_for(std::chrono::milliseconds((long)(1000/frames)));
 	}
