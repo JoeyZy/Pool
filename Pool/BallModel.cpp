@@ -16,10 +16,11 @@ BallModel::BallModel() {
 	//position
 	x = 0.0; 
 	y = 0.0;
-	friction = 0.005f; //number of points to decrease in frames/second for model
+	friction = 0.002f; //number of points to decrease in frames/second for model
 	radius = 20; //radious
 	type = "Ball";
 	maxSpeed = 4.0; //max number of points to pass for model in frames/second
+	listen();
 }
 BallModel::~BallModel() {
 }
@@ -86,7 +87,7 @@ void BallModel::correctSpeed() {
 	}
 
 	float x  = abs((c - localFriction)/c);
-	std::cout << x << " " << c << " " << stepLeft << " " <<  stepRight << " " <<  stepUp << " " <<  stepDown << endl;
+//	std::cout << x << " " << c << " " << stepLeft << " " <<  stepRight << " " <<  stepUp << " " <<  stepDown << endl;
 	if (x < 1) {
 		stepDown*=x;
 		stepLeft*=x;

@@ -11,15 +11,15 @@
 //Main + 1 + 2 + 3 + 4
 
 int main(int argc, char **argv) {
-	Model* model = new BallModel(); //Model
-	model->listen(); //modelling
-	View* view = new OpenGLView(argc, argv); //View
-	Controller* c = new WindowsKeyboardController(model, view); //Controller
+	Model* mainModel = new BallModel(); //Model
+//	mainModel->listen(); //modelling
+	View* view = new OpenGLView(); //View
+	Controller* c = new WindowsKeyboardController(mainModel, view); //Controller
 	c->controll(); //do controlling
-	((OpenGLView*)view)->initGL(); //post init in main thread OpenGL
+	((OpenGLView*)view)->initGL(argc, argv); //post init in main thread OpenGL
 	delete c;
 	delete view;
-	delete model;
+	delete mainModel;
 	system("pause");
 	return 0;
 };

@@ -5,8 +5,8 @@ class OpenGLView :
 	public View
 {
 public:
-	OpenGLView(int argc, char** argv);
+	OpenGLView();
 	~OpenGLView();
-	void initGL();
+	void initGL(int argc, char** argv);
 };
 

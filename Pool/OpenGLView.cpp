@@ -54,12 +54,12 @@ void reshape(int w, int h)
 	glLoadIdentity();
 }
 
-OpenGLView::OpenGLView(int argc, char **argv) {
+OpenGLView::OpenGLView() {
 	type = "OpenGL";
-	glutInit(&argc,argv);
 }
 
-void OpenGLView::initGL() {
+void OpenGLView::initGL(int argc, char **argv) {
+	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
 	glutInitWindowSize(OpenGLView::model->areaWidth,OpenGLView::model->areaHeight);
 	glutInitWindowPosition(100,100);
