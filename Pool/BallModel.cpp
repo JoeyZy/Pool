@@ -40,37 +40,19 @@ void BallModel::move(MoveType move) {
 	case LEFT:
 		speedX -= startSpeed;
 		if (abs(speedX)> maxSpeed) speedX = -maxSpeed;
-//		increaseSpeed(stepLeft, speedX);
 		break;
 	case UP:
 		speedY += startSpeed;
 		if (abs(speedY)> maxSpeed) speedY = maxSpeed;
-//		increaseSpeed(speedY, stepDown);
 		break;
 	case RIGHT:
 		speedX += startSpeed;
 		if (abs(speedX)> maxSpeed) speedX = maxSpeed;
-//		increaseSpeed(speedX, stepLeft);
 		break;
 	case DOWN:
 		speedY -= startSpeed;
 		if (abs(speedY)> maxSpeed) speedY = -maxSpeed;
-//		increaseSpeed(stepDown, speedY);
 		break;
-	}
-}
-
-void BallModel::increaseSpeed(float &speed1, float &speed2) {
-	speed1 += startSpeed;
-	if (speed1 > maxSpeed) speed1 = maxSpeed;
-	if (speed2 > speed1) {
-		speed2 = speed2 - speed1;
-		speed1 = 0;
-	} else if (speed2 < speed1) {
-		speed1 = speed1 - speed2;
-		speed2 = 0;
-	} else {
-		speed1 = speed2 = 0;
 	}
 }
 
@@ -87,7 +69,6 @@ void BallModel::correctSpeed() {
 	}
 
 	float x  = abs((c - localFriction)/c);
-	//	std::cout << x << " " << c << " " << stepLeft << " " <<  speedX << " " <<  speedY << " " <<  stepDown << endl;
 	if (x < 1) {
 		speedX*=x;
 		speedY*=x;
