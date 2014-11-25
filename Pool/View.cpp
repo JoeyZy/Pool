@@ -1,6 +1,7 @@
 #include "View.h"
 
 void View::addModel(Model* model) {
+	model->setView(this);
 	models.push_back(model);
 }
 

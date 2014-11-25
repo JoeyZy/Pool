@@ -27,3 +27,13 @@ void Model::setController(Controller* controller) {
 Controller* Model::getController() {
 	return controller;
 }
+
+void Model::setView(View* view) {
+	this->view = view;
+	listen();
+}
+
+View* Model::getView() {
+	return view;
+}
+
