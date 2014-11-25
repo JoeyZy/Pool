@@ -1,13 +1,11 @@
 #include "View.h"
 
-Model* View::model;
-
-void View::setModel(Model* model) {
-	this->model = model;
+void View::addModel(Model* model) {
+	models.push_back(model);
 }
 
-Model* View::getModel() {
-	return model;
+vector<Model*> View::getModels() {
+	return models;
 }
 
 string View::getType() {

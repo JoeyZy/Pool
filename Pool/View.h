@@ -1,14 +1,17 @@
 #pragma once
 #include "Model.h"
+#include <vector>
 
 class View
 {
 protected:
 	string type;
 public:
-	static Model* model;
+	int areaWidth;
+	int areaHeight;
+	vector<Model*> models;
 	string getType();
-	void setModel(Model* model);
-	Model* getModel();
+	void addModel(Model* model);
+	vector<Model*> getModels();
 };
 

@@ -4,9 +4,6 @@
 
 class BallModel: public Model {
 public:
-	Model* passiveBall;
-	void setPassiveBall(Model* model);
-	Model* getPassiveBall();
 	double frames;
 	float m;
 	float stepLeft;

@@ -12,7 +12,7 @@ WindowsKeyboardController::WindowsKeyboardController(Model* model, View* view) {
 	this->model = model;
 	this->view = view;
 	model->setController(this); //Model listen to controller;
-	view->setModel(model); //View listen to Model and redraw it by itself;
+	view->addModel(model); //View listen to Model and redraw it by itself;
 }
 
 void WindowsKeyboardController::controll() {

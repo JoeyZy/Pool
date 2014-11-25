@@ -13,7 +13,7 @@
 int main(int argc, char **argv) {
 	Model* mainModel = new BallModel(); //Model
 //	mainModel->listen(); //modelling
-	View* view = new OpenGLView(); //View
+	View* view = OpenGLView::getInstance(); //View
 	Controller* c = new WindowsKeyboardController(mainModel, view); //Controller
 	c->controll(); //do controlling
 	((OpenGLView*)view)->initGL(argc, argv); //post init in main thread OpenGL

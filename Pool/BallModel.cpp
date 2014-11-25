@@ -4,8 +4,7 @@
 #include <math.h>
 
 BallModel::BallModel() {
-	areaWidth = 1280;
-	areaHeight = 720;
+	type = "Ball";
 	frames = 250;
 	m = 10;
 	startSpeed = 0.12f; //number of points to pass for model in frames/second
@@ -18,7 +17,6 @@ BallModel::BallModel() {
 	y = 0.0;
 	friction = 0.002f; //number of points to decrease in frames/second for model
 	radius = 20; //radious
-	type = "Ball";
 	maxSpeed = 4.0; //max number of points to pass for model in frames/second
 	listen();
 }
@@ -34,16 +32,9 @@ void BallModel::setRadius(int radius) {
 	this->radius = radius;
 }
 
-void BallModel::setPassiveBall(Model* model) {
-	passiveBall = model;
-}
-
-Model* BallModel::getPassiveBall(){
-	return passiveBall;
-}
-
 void BallModel::move(MoveType move) {
-
+	areaWidth = controller->getView()->areaWidth;
+	areaHeight = controller->getView()->areaHeight;
 	switch (move) {
 	case LEFT:
 		increaseSpeed(stepLeft, stepRight);
@@ -87,7 +78,7 @@ void BallModel::correctSpeed() {
 	}
 
 	float x  = abs((c - localFriction)/c);
-//	std::cout << x << " " << c << " " << stepLeft << " " <<  stepRight << " " <<  stepUp << " " <<  stepDown << endl;
+	//	std::cout << x << " " << c << " " << stepLeft << " " <<  stepRight << " " <<  stepUp << " " <<  stepDown << endl;
 	if (x < 1) {
 		stepDown*=x;
 		stepLeft*=x;
