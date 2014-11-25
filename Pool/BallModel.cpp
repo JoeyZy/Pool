@@ -7,11 +7,11 @@
 BallModel::BallModel() {
 	type = "Ball";
 	frames = 250;
-	m = 10;
+	m = 100000;
 	startSpeed = 0.12f; //number of points to pass for model in frames/second
 //	stepLeft = 0.0; //numer of point for model to pass to left direction
-	stepUp = 0.0; // -//- up
-	stepRight = 0.0; // -//- right
+	speedY = 0.0; // -//- up
+	speedX = 0.0; // -//- right
 //	stepDown = 0.0; // -//- down
 	//position
 	x = 0.0; 
@@ -38,24 +38,24 @@ void BallModel::move(MoveType move) {
 	areaHeight = controller->getView()->areaHeight;
 	switch (move) {
 	case LEFT:
-		stepRight -= startSpeed;
-		if (abs(stepRight)> maxSpeed) stepRight = -maxSpeed;
-//		increaseSpeed(stepLeft, stepRight);
+		speedX -= startSpeed;
+		if (abs(speedX)> maxSpeed) speedX = -maxSpeed;
+//		increaseSpeed(stepLeft, speedX);
 		break;
 	case UP:
-		stepUp += startSpeed;
-		if (abs(stepUp)> maxSpeed) stepUp = maxSpeed;
-//		increaseSpeed(stepUp, stepDown);
+		speedY += startSpeed;
+		if (abs(speedY)> maxSpeed) speedY = maxSpeed;
+//		increaseSpeed(speedY, stepDown);
 		break;
 	case RIGHT:
-		stepRight += startSpeed;
-		if (abs(stepRight)> maxSpeed) stepRight = maxSpeed;
-//		increaseSpeed(stepRight, stepLeft);
+		speedX += startSpeed;
+		if (abs(speedX)> maxSpeed) speedX = maxSpeed;
+//		increaseSpeed(speedX, stepLeft);
 		break;
 	case DOWN:
-		stepUp -= startSpeed;
-		if (abs(stepUp)> maxSpeed) stepUp = -maxSpeed;
-//		increaseSpeed(stepDown, stepUp);
+		speedY -= startSpeed;
+		if (abs(speedY)> maxSpeed) speedY = -maxSpeed;
+//		increaseSpeed(stepDown, speedY);
 		break;
 	}
 }
@@ -76,9 +76,9 @@ void BallModel::increaseSpeed(float &speed1, float &speed2) {
 
 void BallModel::correctSpeed() {
 	// speed c = sqrt ( speedX^2 + speedY^2)
-	float c = sqrt(pow(stepRight,2) + pow(stepUp,2));
+	float c = sqrt(pow(speedX,2) + pow(speedY,2));
 	if (c < friction) {
-		c = stepRight = stepUp = 0;
+		c = speedX = speedY = 0;
 	} 
 	float localFriction = friction;
 	//controll speed
@@ -87,10 +87,10 @@ void BallModel::correctSpeed() {
 	}
 
 	float x  = abs((c - localFriction)/c);
-	//	std::cout << x << " " << c << " " << stepLeft << " " <<  stepRight << " " <<  stepUp << " " <<  stepDown << endl;
+	//	std::cout << x << " " << c << " " << stepLeft << " " <<  speedX << " " <<  speedY << " " <<  stepDown << endl;
 	if (x < 1) {
-		stepRight*=x;
-		stepUp*=x;
+		speedX*=x;
+		speedY*=x;
 	}
 }
 
@@ -104,29 +104,30 @@ void BallModel::doListening() {
 
 		// mirror model way from vertical borders
 		if (x+radius+1>=areaWidth/2 || x-radius-1<=-areaWidth/2) {
-			stepRight = -stepRight;
+			speedX = -speedX;
 		}
 		// mirror model from horizontal borders
 		if (y+radius+1>=areaHeight/2 || y-radius-1<=-areaHeight/2) {
-			stepUp = -stepUp;
+			speedY = -speedY;
 		}
+		
 		/*
+		cout << x << " " << y << endl;
 		if (controller != NULL) {
 			vector<Model*> models = controller->getView()->getModels();
 			for (auto model: models) {
 				if (this == model) continue;
 				BallModel* localModel = (BallModel*) model;
-				int dis = sqrt(pow(x - localModel->getX(),2) + pow(y - localModel->getY(), 2));
-				if (dis +1 == radius + localModel->getRadius()) {
-					cout << dis << " " << x << " " << y << " " << localModel->getX() << " " << localModel->getY() << endl;
+				float dis = sqrt(pow(x - localModel->getX(),2) + pow(y - localModel->getY(), 2));
+				if (dis  <= radius + localModel->getRadius()) {
 					cout << "lower" << endl;
 					float dx = x-localModel->getX();
 					float dy = y-localModel->getY();
 					float collisionision_angle = atan(dy/dx);
-					float magnitude_1 = sqrt(pow(stepLeft,2) + pow(stepRight,2) + pow(stepUp,2) + pow(stepDown, 2));
-					float magnitude_2 = sqrt(pow(localModel->stepLeft,2) + pow(localModel->stepRight,2) + pow(localModel->stepUp,2) + pow(localModel->stepDown, 2));
-					float direction_1 = atan((stepUp + stepDown) /(stepLeft + stepRight));
-					float direction_2 = atan((localModel->stepUp + localModel->stepDown) /(localModel->stepLeft + localModel->stepRight));
+					float magnitude_1 = sqrt(pow(speedX,2) + pow(speedY,2));
+					float magnitude_2 = sqrt(pow(localModel->speedX,2) + pow(localModel->speedY,2));
+					float direction_1 = atan((speedY) /(speedX));
+					float direction_2 = atan((localModel->speedY) /(localModel->speedX));
 					float new_xspeed_1 = magnitude_1*cos(direction_1-collisionision_angle);
 					float new_yspeed_1 = magnitude_1*sin(direction_1-collisionision_angle);
 					float new_xspeed_2 = magnitude_2*cos(direction_2-collisionision_angle);
@@ -135,16 +136,16 @@ void BallModel::doListening() {
 					float final_xspeed_2 = ((m+m)*new_xspeed_1+(localModel->m-m)*new_xspeed_2)/(m+localModel->m);
 					float final_yspeed_1 = new_yspeed_1;
 					float final_yspeed_2 = new_yspeed_2;
-					stepLeft>stepRight?stepLeft:stepRight = cos(collisionision_angle)*final_xspeed_1+cos(collisionision_angle+M_PI/2)*final_yspeed_1;
-					stepUp>stepDown?stepUp:stepDown = sin(collisionision_angle)*final_xspeed_1+sin(collisionision_angle+M_PI/2)*final_yspeed_1;
-					localModel->stepLeft>localModel->stepRight?localModel->stepLeft:stepRight = cos(collisionision_angle)*final_xspeed_2+cos(collisionision_angle+M_PI/2)*final_yspeed_2;
-					localModel->stepUp>localModel->stepDown?localModel->stepUp:stepDown = sin(collisionision_angle)*final_xspeed_2+sin(collisionision_angle+M_PI/2)*final_yspeed_2;
+					speedX = cos(collisionision_angle)*final_xspeed_1+cos(collisionision_angle+M_PI/2)*final_yspeed_1;
+					speedY = sin(collisionision_angle)*final_xspeed_1+sin(collisionision_angle+M_PI/2)*final_yspeed_1;
+					localModel->speedX = cos(collisionision_angle)*final_xspeed_2+cos(collisionision_angle+M_PI/2)*final_yspeed_2;
+					localModel->speedY = sin(collisionision_angle)*final_xspeed_2+sin(collisionision_angle+M_PI/2)*final_yspeed_2;
 				}
 			}
 		}
 		*/
-		y+=stepUp;
-		x+=stepRight;
+		y+=speedY;
+		x+=speedX;
 		correctSpeed();
 		std::this_thread::sleep_for(std::chrono::milliseconds((long)(1000/frames)));
 	}

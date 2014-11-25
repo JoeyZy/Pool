@@ -6,10 +6,8 @@ class BallModel: public Model {
 public:
 	double frames;
 	float m;
-//	float stepLeft;
-	float stepUp;
-	float stepRight;
-//	float stepDown;
+	float speedX;
+	float speedY;
 	int radius;
 	float startSpeed;
 	float maxSpeed;
