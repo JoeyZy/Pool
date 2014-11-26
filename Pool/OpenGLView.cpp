@@ -37,13 +37,13 @@ void displayCircle(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 	glPushMatrix();
 	glColor3f(1.0,1.0,1.0);
+	bool first = true;
 	for (auto model: models) {
 		BallModel* localModel = (BallModel*) model;
 		circle(localModel->getX(), localModel->getY(), localModel->getRadius(), 40);
+		first = false;
+		glColor3f(0.0,0.0,0.7);
 	}
-
-//	circle(model->getX(), model->getY(), model->getRadius(), 40);
-//	if (model->getPassiveBall()!=NULL) circle(model->getPassiveBall()->getX(), model->getPassiveBall()->getY(), ((BallModel*)(model->getPassiveBall()))->getRadius(), 40);
 	glPopMatrix();
 	glutSwapBuffers();
 }

@@ -2,6 +2,7 @@
 
 #include "MoveType.h"
 #include "string"
+#include <Windows.h>
 using namespace std;
 
 class Controller;
@@ -15,8 +16,11 @@ protected:
 	float x, y, speedX, speedY, friction;
 	string type;
 public:
+//	CRITICAL_SECTION critical;
+	int id;
 	int areaWidth;
 	int areaHeight;
+	volatile bool isModelling;
 	float getX();
 	void setX(float x);
 	float getY();

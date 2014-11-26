@@ -2,10 +2,13 @@
 #include "Controller.h"
 #include <thread>
 #include <math.h>
+
 # define M_PI         3.141592653589793238462643383279502884 /* pi */
+
 
 BallModel::BallModel() {
 	type = "Ball";
+	isModelling = false;
 	frames = 250;
 	m = 100000;
 	startSpeed = 0.12f; //number of points to pass for model in frames/second
@@ -17,7 +20,7 @@ BallModel::BallModel() {
 	x = 0.0; 
 	y = 0.0;
 	friction = 0;//0.002f; //number of points to decrease in frames/second for model
-	radius = 20; //radious
+	radius = 40; //radious
 	maxSpeed = 4.0; //max number of points to pass for model in frames/second
 	//	listen();
 }
@@ -79,6 +82,7 @@ void BallModel::listen() {
 }
 
 void BallModel::doListening() {
+	isModelling=true;
 	areaWidth = view->areaWidth;
 	areaHeight = view->areaHeight;
 	while (true) {
@@ -88,35 +92,32 @@ void BallModel::doListening() {
 		//	correctSpeed();
 
 		// mirror model way from vertical borders
-		if (x+radius+1>=areaWidth/2 || x-radius-1<=-areaWidth/2) {
+
+		if (x+radius>=areaWidth/2 || x-radius<=-areaWidth/2) {
 			speedX = -speedX;
+			while (x+radius>=areaWidth/2 || x-radius<=-areaWidth/2) {
+				x<0?x+=startSpeed:x-=startSpeed;
+//				x<0?speedX+=startSpeed:speedX-=startSpeed;
+			}
 		}
 		// mirror model from horizontal borders
-		if (y+radius+1>=areaHeight/2 || y-radius-1<=-areaHeight/2) {
+		if (y+radius>=areaHeight/2 || y-radius<=-areaHeight/2) {
 			speedY = -speedY;
+			while (y+radius>=areaHeight/2 || y-radius<=-areaHeight/2) {
+				y<0?y+=startSpeed:y-=startSpeed;
+//				y<0?speedY+=startSpeed:speedY-=startSpeed;
+			}
 		}
 
-		/*
-		if (controller != NULL) {
-		vector<Model*> models = controller->getView()->getModels();
-		for (auto model: models) {
-		if (this == model) continue;
-		BallModel* localModel = (BallModel*) model;
-		float dis = sqrt(pow(x - localModel->getX(),2) + pow(y - localModel->getY(), 2));
-		if (dis  <= radius + localModel->getRadius()) {
-
-		}
-		}
-		}*/
-
-		if (view != NULL) {
+		if (view != NULL && type.compare("ball2")!=0) {
 			vector<Model*> models = view->getModels();
 			for (auto model: models) {
-				if (this == model) continue;
 				BallModel* localModel = (BallModel*) model;
+				if (this == localModel) continue;
 				float dis = sqrt(pow(x - localModel->getX(),2) + pow(y - localModel->getY(), 2));
 				if (dis  <= radius + localModel->getRadius()) {
-					cout << "lower" << endl;
+					time_t  timev;
+					cout << "lower: " << time(&timev) << endl;
 					float dx = x-localModel->getX();
 					float dy = y-localModel->getY();
 					float dif = dx!=0?dy/dx:0;
@@ -127,7 +128,7 @@ void BallModel::doListening() {
 					float direction_1 = atan(dif);
 					dif = localModel->speedX!=0?localModel->speedY/localModel->speedX:0;
 					float direction_2 = atan(dif);
-					cout << collisionision_angle << " " << magnitude_1 << " " << magnitude_2 << " " << direction_1 << " " << direction_2 << endl;
+					//					cout << collisionision_angle << " " << magnitude_1 << " " << magnitude_2 << " " << direction_1 << " " << direction_2 << endl;
 					float new_xspeed_1 = magnitude_1*cos(direction_1-collisionision_angle);
 					float new_yspeed_1 = magnitude_1*sin(direction_1-collisionision_angle);
 					float new_xspeed_2 = magnitude_2*cos(direction_2-collisionision_angle);
@@ -140,18 +141,20 @@ void BallModel::doListening() {
 					speedY = sin(collisionision_angle)*final_xspeed_1+sin(collisionision_angle+M_PI/2)*final_yspeed_1;
 					localModel->speedX = cos(collisionision_angle)*final_xspeed_2+cos(collisionision_angle+M_PI/2)*final_yspeed_2;
 					localModel->speedY = sin(collisionision_angle)*final_xspeed_2+sin(collisionision_angle+M_PI/2)*final_yspeed_2;
-					
-//					float dis = sqrt(pow(x - localModel->getX(),2) + pow(y - localModel->getY(), 2));
-//					while (dis  <= radius + localModel->getRadius()) {
-						x += speedX;
-						y += speedY;
-						localModel->x += localModel->speedX;
-						localModel->y += localModel->speedY;
-//					}
 
+					dis = sqrt(pow(x - localModel->getX(),2) + pow(y - localModel->getY(), 2));
 
+					while (dis  <= radius + localModel->getRadius()) {
+						float stepX = dx!=0?dx/abs(dx)*startSpeed:0;
+						float stepY = dy!=0?dy/abs(dy)*startSpeed:0;
+						x+=stepX;
+						y+=stepY;
+						localModel->x+=-stepX;
+						localModel->y+=-stepY;
+						dis = sqrt(pow(x - localModel->getX(),2) + pow(y - localModel->getY(), 2));
+					}
 				}
-				cout << type << " " << speedX << " " << speedY << " " << localModel->speedX << " " << localModel->speedY << endl;
+				//	cout << type << " " << speedX << " " << speedY << " " << localModel->speedX << " " << localModel->speedY << endl;
 			}
 		}
 
