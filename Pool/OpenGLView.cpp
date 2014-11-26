@@ -10,6 +10,7 @@
 using namespace std;
 const double PI=3.141592653589793238463;
 
+CRITICAL_SECTION OpenGLView::cs;
 OpenGLView* OpenGLView::instance = 0;
 
 void init(void)

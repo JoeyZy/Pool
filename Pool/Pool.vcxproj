@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BallModel.h" />
+    <ClInclude Include="SingleLockObj.h" />
     <ClInclude Include="OpenGLView.h" />
     <ClInclude Include="WindowsKeyboardController.h" />
     <ClInclude Include="ConsoleView.h" />

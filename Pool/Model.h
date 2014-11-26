@@ -1,8 +1,6 @@
 #pragma once
-
 #include "MoveType.h"
 #include "string"
-#include <Windows.h>
 using namespace std;
 
 class Controller;

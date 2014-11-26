@@ -36,4 +36,3 @@ void Model::setView(View* view) {
 View* Model::getView() {
 	return view;
 }
-

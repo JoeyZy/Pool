@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include "Model.h"
-#include <Windows.h>
 
 
 class BallModel: public Model {
