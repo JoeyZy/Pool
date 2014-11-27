@@ -11,16 +11,19 @@
 //Main + 1 + 2 + 3 + 4
 
 int main(int argc, char **argv) {
+	InitializeCriticalSection(&OpenGLView::cs);
 	View* view = OpenGLView::getInstance(); //View
-	Model* model1 = new BallModel(); //Model1
-	Model* mainModel = new BallModel(); //Model
-//	model1->setX(model1->getX()+100);
-	model1->setY(model1->getY()+100);
-	model1->setType("ball2");
+	Model* mainModel = new BallModel(-200); //Controlled model	
 	Controller* c = new WindowsKeyboardController(mainModel, view); //Controller
-	model1->isModelling=true;
-	view->addModel(model1);
 	c->controll(); //do controlling
+	Model* model1 = new BallModel(100,0); //Model1
+	view->addModel(model1);
+	//set weight (default = 10)
+	((BallModel*)mainModel)->m = 1000;
+	view->addModel(new BallModel(200,200));
+	view->addModel(new BallModel(-100,0));
+//	view->addModel(new BallModel(0,0));
+	view->addModel(new BallModel(200,100));
 	((OpenGLView*)view)->initGL(argc, argv); //post init in main thread OpenGL
 	delete c;
 	delete view;

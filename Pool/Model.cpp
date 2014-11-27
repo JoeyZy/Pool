@@ -3,6 +3,8 @@
 #include "Controller.h"
 #include <thread>
 
+int Model::id = 0;
+
 float Model::getX() {
 	return x;
 }
@@ -30,7 +32,7 @@ Controller* Model::getController() {
 
 void Model::setView(View* view) {
 	this->view = view;
-	listen();
+//	listen();
 }
 
 View* Model::getView() {

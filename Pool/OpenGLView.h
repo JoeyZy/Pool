@@ -14,13 +14,16 @@ private:
 public:
 	static CRITICAL_SECTION cs;
 	static OpenGLView* getInstance() {
+//		EnterCriticalSection(&OpenGLView::getInstance()->cs);
 		if (!instance) {
+			//InitializeCriticalSection(&cs);
 			instance = new OpenGLView();
-			InitializeCriticalSection(&cs);
 		}
+//		LeaveCriticalSection(&OpenGLView::getInstance()->cs);
 		return instance;
 	}
 	~OpenGLView();
+	void addModel(Model* model);
 	void initGL(int argc, char** argv);
 };
 

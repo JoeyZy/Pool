@@ -43,7 +43,7 @@ void displayCircle(void)
 		BallModel* localModel = (BallModel*) model;
 		circle(localModel->getX(), localModel->getY(), localModel->getRadius(), 40);
 		first = false;
-		glColor3f(0.0,0.0,0.7);
+		glColor3f(0.0,0.0,0.9);
 	}
 	glPopMatrix();
 	glutSwapBuffers();
@@ -74,6 +74,9 @@ OpenGLView::OpenGLView() {
 
 void OpenGLView::initGL(int argc, char **argv) {
 	glutInit(&argc,argv);
+	for (auto model: models) {
+		model->listen();
+	}
 	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
 	glutInitWindowSize(areaWidth,areaHeight);
 	glutInitWindowPosition(100,100);

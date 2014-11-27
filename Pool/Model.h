@@ -15,7 +15,7 @@ protected:
 	string type;
 public:
 //	CRITICAL_SECTION critical;
-	int id;
+	static int id;
 	int areaWidth;
 	int areaHeight;
 	volatile bool isModelling;
